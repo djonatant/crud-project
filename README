@@ -1,1 +1,16 @@
+Tecnologias utilizadas:
 
+ - Para o back-end
+Framework Doctrine ORM.
+Banco de dados MySql.
+
+- Para o front-end
+Framework jQuery (Para JS).
+Framework Bootstrap (Para CSS).
+
+COMO INSTALAR:
+
+1. Possuir um ambiente local com o PHP 8.0.2^ instalado e MySql.
+2. Rodar no banco de dados MySql o script do arquivo 'script_djonatan.sql'.
+3. Copiar o restante dos arquivos para a pasta do seu ambiente de desenvolvimento. (Caso utilize o XAMPP para ambiente de desenvolvimento, utilize a pasta htdocs).
+4. Abrir a pasta no seu navegador.
