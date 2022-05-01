@@ -1,0 +1,23 @@
+{
+    "name": "djonatan/magazord",
+    "description": "Crud simples",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Estrutura\\": "src/Estrutura",
+            "Includes\\": "src/Includes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Djonatan Tristão"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.12",
+        "symfony/cache": "^6.0",
+        "doctrine/annotations": "^1.13",
+        "doctrine/dbal": "^3.3",
+        "twbs/bootstrap": "5.0.2"
+    }
+}
