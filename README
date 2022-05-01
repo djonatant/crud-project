@@ -13,4 +13,8 @@ COMO INSTALAR:
 1. Possuir um ambiente local com o PHP 8.0.2^ instalado e MySql.
 2. Rodar no banco de dados MySql o script do arquivo 'script_djonatan.sql'.
 3. Copiar o restante dos arquivos para a pasta do seu ambiente de desenvolvimento. (Caso utilize o XAMPP para ambiente de desenvolvimento, utilize a pasta htdocs).
-4. Abrir a pasta no seu navegador.
+4. Abrir a pasta no seu navegador através do link: 
+    http://localhost/Magazord/public/index.php?rot=Pessoa&aca=101
+    
+    IMPORTANTE: Para abrir a rotina inicial, não esquecer de abrir com os parametros 'public/index.php?rot=Pessoa&aca=101', 
+                onde 'rot' é referente à rotina a ser aberta e 'aca' é referente à ação a ser realizada.
