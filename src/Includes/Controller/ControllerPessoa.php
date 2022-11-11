@@ -1,6 +1,5 @@
 <?php
 namespace Includes\Controller;
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Magazord/vendor/autoload.php';
 
 use Estrutura\ControllerPadrao;
 use Includes\View\ViewPessoa;
@@ -22,17 +21,20 @@ class ControllerPessoa extends ControllerPadrao {
     /**
      * Método responsável por realizar busca de dados no banco.
      * @param Boolean|String $sFindBy Valor da coluna a ser utilizada na condição do SQL.
-     * @param String $sColuna         Coluna a ser consultada na condição do SQL.
      * @return Array
      */
-    public function buscaDados($xFindBy, $sColuna = 'nome') {
+    public function buscaDados($xFindBy) {
         $oManageFactory = $this->getManageFactory();
         $oRepositorio   = $oManageFactory->getRepository('Includes\Model\Pessoa');
         
         if($xFindBy == false) {
             $aRegistros = $oRepositorio->findAll();
         } else {
-            $aRegistros = $oRepositorio->findBy([$sColuna => $xFindBy]);
+            $aRegistros = $oRepositorio->createQueryBuilder('pessoa')
+                                    ->where('pessoa.nome LIKE :nome')
+                                    ->setParameter('nome', '%'.$xFindBy.'%')
+                                    ->getQuery()
+                                    ->getResult();
         }
 
         return $aRegistros;

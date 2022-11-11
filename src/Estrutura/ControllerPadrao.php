@@ -1,7 +1,6 @@
 <?php
 namespace Estrutura;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Magazord/vendor/autoload.php';
 use Estrutura\ManageFactory;
 
 /**
@@ -10,7 +9,7 @@ use Estrutura\ManageFactory;
  * @author Djonatan Tristão
  * @since 28/04/2022
  */
-class ControllerPadrao {
+abstract class ControllerPadrao {
 
     public $Model;
     public $View;

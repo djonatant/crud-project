@@ -1,7 +1,6 @@
 <?php
 namespace Includes\View;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Magazord/vendor/autoload.php';
 use Estrutura\ViewPadrao;
 use Estrutura\Rotina;
 

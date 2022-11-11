@@ -1,7 +1,6 @@
 <?php
 namespace Estrutura;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Magazord/vendor/autoload.php';
 use Estrutura\Formulario;
 use Estrutura\GridDados;
 

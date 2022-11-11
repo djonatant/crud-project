@@ -1,6 +1,5 @@
 <?php
 namespace Includes\Controller;
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Magazord/vendor/autoload.php';
 
 use Estrutura\ControllerPadrao;
 use Estrutura\EnumAcao;

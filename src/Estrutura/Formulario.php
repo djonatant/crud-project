@@ -14,13 +14,6 @@ class Formulario {
     private $title;
     private $campos = [];
     private $mensagemAfterProcessa = '';
-    private $mensagemTipo = 'success';
-    private $fnAfter = 'false';
-    private $fnOnError = 'false';
-    private $fnOnSuccess = 'false';
-    private $fnMessageYes = 'false';
-    private $fnMessageNo  = 'false';
-    private $limpaCamposAfterProcessa = 'true';
     private $imprimeTitulo = false;
     private $tituloBotaoConsultaExtra = false;
     private $script = [];
@@ -86,21 +79,14 @@ class Formulario {
     public function renderButtonsDefault($bConfirma, $bLimpaCampos) {
         $sCampo = '';
         if($this->acao != EnumAcao::ACAO_VISUALIZAR) {
-            if($bConfirma) {
-                $sCampo .= $this->renderButtonConfirma();
-            }
-            $sCampo .= "&nbsp;";
-            if($bLimpaCampos) {
-                $sCampo .= $this->renderButtonLimpaCampos();
-            }
-            if($this->acao != EnumAcao::ACAO_INCLUIR) {
-                $sCampo .= $this->renderButtonExcluir();
-            }
+            $sCampo .= $this->renderButtonConfirma($bConfirma);
+            $sCampo .= $this->renderButtonLimpaCampos($bLimpaCampos);
+            $sCampo .= $this->renderButtonExcluir();
+            
             if($this->getTituloBotaoConsultaExtra()) {
                 $sCampo .= $this->renderButtonConsultaExtra();
             }
-            $sCampo .= $this->renderButtonVoltar();
-        } else {
+            
             $sCampo .= $this->renderButtonVoltar();
         }
         
@@ -111,10 +97,12 @@ class Formulario {
      * Renderiza o botão de 'Confirmar'.
      * @return String
      */
-    public function renderButtonConfirma() {
-        $sScript = "componente['" . $this->getId() . "']['submit'] = new Botao('submit_form', submit, '" . $this->getId() . "', '" . $this->getAcao() . "')";
-        $this->adicionaScript($sScript);
-        return "<button class='btn btn-primary m-1' name='submit_form' type='button'>Confirmar</button>";
+    public function renderButtonConfirma($bConfirma) {
+        if($bConfirma) {
+            $sScript = "componente['" . $this->getId() . "']['submit'] = new Botao('submit_form', submit, '" . $this->getId() . "', '" . $this->getAcao() . "')";
+            $this->adicionaScript($sScript);
+            return "<button class='btn btn-primary m-1' name='submit_form' type='button'>Confirmar</button>";
+        }
     }
 
     /**
@@ -122,9 +110,11 @@ class Formulario {
      * @return String
      */
     public function renderButtonExcluir() {
-        $sScript = "componente['" . $this->getId() . "']['submit'] = new Botao('submit_form_exclusao', submit, '" . $this->getId() . "', '" . EnumAcao::ACAO_EXCLUIR . "')";
-        $this->adicionaScript($sScript);
-        return "<button class='btn btn-danger m-1' name='submit_form_exclusao' type='button'>Excluir registro</button>";
+        if($this->acao != EnumAcao::ACAO_INCLUIR) {
+            $sScript = "componente['" . $this->getId() . "']['submit'] = new Botao('submit_form_exclusao', submit, '" . $this->getId() . "', '" . EnumAcao::ACAO_EXCLUIR . "')";
+            $this->adicionaScript($sScript);
+            return "<button class='btn btn-danger m-1' name='submit_form_exclusao' type='button'>Excluir registro</button>";
+        }
     }
     
     /**
@@ -143,8 +133,10 @@ class Formulario {
      * Renderiza o botão de 'Limpar campos'.
      * @return String
      */
-    public function renderButtonLimpaCampos() {
-        return "<input type='reset' class='btn btn-primary m-1' value='Limpar campos'>";
+    public function renderButtonLimpaCampos($bLimpaCampos) {
+        if($bLimpaCampos) {
+            return "<input type='reset' class='btn btn-primary m-1' value='Limpar campos'>";
+        }
     }
 
     /**
