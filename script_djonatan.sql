@@ -29,8 +29,10 @@ CREATE TABLE `contato` (
   `tipo` tinyint(1) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `idPessoa` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  KEY `idPessoa` (`idPessoa`),
+  CONSTRAINT `contato_ibfk_1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
