@@ -6,20 +6,17 @@
  * @param {Integer} iAcao 
  * @param {String|Boolean} xChave 
  */
-var Botao = function(name, click = false, sRotina = '', iAcao = 0, xChave = false) {
-    
-    if(click !== false) {
-        var oBotao = document.getElementsByName(name)[0];
-        oBotao.addEventListener('click', click);
-        oBotao.rotina   = sRotina;
-        oBotao.acao     = iAcao;
-        oBotao.new      = `index.php?rot=${sRotina}&aca=102`;
-        oBotao.consulta = `index.php?rot=${sRotina}&aca=101`;
-        oBotao.edit     = `index.php?rot=${sRotina}&aca=103`;
-        oBotao.read     = `index.php?rot=${sRotina}&aca=105`;
-        oBotao.contato  = `index.php?rot=Contato&aca=101`;
-        oBotao.chave    = xChave;
-    }
+var Botao = function(name, click, sRotina = '', iAcao = 0, xChave = false) {
+    var oBotao = document.getElementsByName(name)[0];
+    oBotao.addEventListener('click', click);
+    oBotao.rotina   = sRotina;
+    oBotao.acao     = iAcao;
+    oBotao.new      = `index.php?rot=${sRotina}&aca=102`;
+    oBotao.consulta = `index.php?rot=${sRotina}&aca=101`;
+    oBotao.edit     = `index.php?rot=${sRotina}&aca=103`;
+    oBotao.read     = `index.php?rot=${sRotina}&aca=105`;
+    oBotao.contato  = `index.php?rot=Contato&aca=101`;
+    oBotao.chave    = xChave;
 };
 
 /**
@@ -49,9 +46,20 @@ var consultar = function(param) {
         sCampoPesquisa = $(`[name='chave_parent']`).val();
     }
     var iTime          = Math.round((new Date()).getTime()/1000);
+
     if(sCampoPesquisa != '' && sCampoPesquisa != undefined) {
         aDados += `&findBy=${sCampoPesquisa}`;
     }
+
+    buscaDadosPesquisa(iTime, aDados, sRotina);
+};
+
+/**
+ * Executa a requisição de consulta
+ * @param {Integer} iTime 
+ * @param {JSON} aDados 
+ */
+const buscaDadosPesquisa = (iTime, aDados, sRotina) => {
     $.post("index.php?requisicaoAjax=t&temp=" + iTime, aDados, function( xRetorno ) {
         xRetorno = JSON.parse(xRetorno);
         for(var i = 0; i < xRetorno.length; i++) {
