@@ -1,12 +1,12 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Magazord/vendor/autoload.php';
+require_once '../Config/Config.php';
+require_once PATH_SISTEMA . '/src/Estrutura/Utils.php';
+require_once PATH_SISTEMA . '/vendor/autoload.php';
 
 use Estrutura\Rotina;
 use Estrutura\EnumAcao;
 use Estrutura\Principal;
 use Estrutura\Sistema;
-use Includes\Controller\ControllerPessoa;
-use Includes\Controller\ControllerContato;
 
 if(array_key_exists('requisicaoAjax', $_GET) && array_key_exists('temp', $_GET)) {
     $sRequisicaoAjax = Principal::getInstance()->getParametroGet('requisicaoAjax');
@@ -34,19 +34,21 @@ if(array_key_exists('requisicaoAjax', $_GET) && array_key_exists('temp', $_GET))
         die();
     }
 } 
-else if(array_key_exists('rot', $_GET) && array_key_exists('aca', $_GET)) {
-    $iRotina = Principal::getInstance()->getParametroGet('rot');
-    if($iRotina == Rotina::PESSOA) {
-        $oClasseInicio = new ControllerPessoa(Principal::getInstance()->getParametroGet('aca'));
-        $oClasseInicio->imprimeTela();
-    } 
-    else  if($iRotina == Rotina::CONTATO) {
-        $oClasseInicio = new ControllerContato(Principal::getInstance()->getParametroGet('aca'));
-        $oClasseInicio->imprimeTela();
-    } 
-    else {
-        echo 'Rotina não informada';
+else {
+    $xRotina = Principal::getInstance()->getParametroGet('rot');
+    $xAcao   = Principal::getInstance()->getParametroGet('aca');
+
+    if($xRotina === false) {
+        $xRotina = Rotina::DEFAULT;
     }
+    if($xAcao === false) {
+        $xAcao = EnumAcao::DEFAULT;
+    }
+    
+    $sRotina = Sistema::PATH_INC_CONTROLLER . $xRotina;
+    $oClasseInicio = new $sRotina($xAcao);
+    $oClasseInicio->imprimeTela();
+    
 }
 ?>
 

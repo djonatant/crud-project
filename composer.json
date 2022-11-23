@@ -14,10 +14,12 @@
         }
     ],
     "require": {
+        "php": ">=8.0",
         "doctrine/orm": "^2.12",
         "symfony/cache": "^6.0",
         "doctrine/annotations": "^1.13",
         "doctrine/dbal": "^3.3",
-        "twbs/bootstrap": "5.0.2"
+        "twbs/bootstrap": "5.0.2",
+        "doctrine/migrations": "^3.5"
     }
 }

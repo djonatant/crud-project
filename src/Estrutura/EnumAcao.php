@@ -10,6 +10,8 @@ namespace Estrutura;
  */
 class EnumAcao {
 
+    const DEFAULT = self::ACAO_CONSULTAR;
+
     const ACAO_CONSULTAR    = 101;
     const ACAO_INCLUIR      = 102;
     const ACAO_ALTERAR      = 103;

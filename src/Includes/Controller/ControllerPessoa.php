@@ -69,9 +69,13 @@ class ControllerPessoa extends ControllerPadrao {
         $oModel->setNome($aDados['nome']);
         $oModel->setCpf($aDados['cpf']);
         
-        $oManageFactory = $this->getManageFactory();
-        $oManageFactory->persist($oModel);
-        $oManageFactory->flush();
+        if(getCpfIsValido($oModel->getCpf())) {
+            $oManageFactory = $this->getManageFactory();
+            $oManageFactory->persist($oModel);
+            $oManageFactory->flush();
+        } else {
+            disparaErro('CPF inválido.');
+        }
     }
 
     /**
@@ -84,9 +88,13 @@ class ControllerPessoa extends ControllerPadrao {
         $oModel->setNome($aDados['nome']);
         $oModel->setCpf($aDados['cpf']);
         
-        $oManageFactory = $this->getManageFactory();
-        $oManageFactory->merge($oModel);
-        $oManageFactory->flush();
+        if(getCpfIsValido($oModel->getCpf())) {
+            $oManageFactory = $this->getManageFactory();
+            $oManageFactory->merge($oModel);
+            $oManageFactory->flush();
+        } else {
+            disparaErro('CPF inválido.');
+        }
     }
 
     /**

@@ -29,8 +29,14 @@ var submit = function(param) {
     aDados              = `${aDados}&rot=${param.currentTarget.rotina}`;
     aDados              = `${aDados}&aca=${param.currentTarget.acao}`;
     var iTime           = Math.round((new Date()).getTime()/1000);
-    $.post( "index.php?requisicaoAjax=t&temp=" + iTime, aDados, function( xRetorno ) {
-        window.history.back();
+    $.post("index.php?requisicaoAjax=t&temp=" + iTime, aDados, function( xRetorno ) {
+        xRetorno = xRetorno.trim();
+        if(xRetorno.length > 0) {
+            xRetorno = JSON.parse(xRetorno);
+            $('body').append(xRetorno);
+        } else {
+            window.history.back();
+        }
     });
 };
 
@@ -62,26 +68,32 @@ var consultar = function(param) {
 const buscaDadosPesquisa = (iTime, aDados, sRotina) => {
     $.post("index.php?requisicaoAjax=t&temp=" + iTime, aDados, function( xRetorno ) {
         xRetorno = JSON.parse(xRetorno);
-        for(var i = 0; i < xRetorno.length; i++) {
-            xRetorno[i].push(`
-                <button class='btn btn-warning m-1' name='alterar_${i}' type='button'>Gerenciar</button>
-            `);
-        }
-        var sHtml = '';
-        for(var i = 0; i < xRetorno.length; i++) {
-            sHtml += `<tr>`;
-            for(var x = 0; x < xRetorno[i].length; x++) {
-                sHtml += `<th>${xRetorno[i][x]}</th>`;
+        if(typeof xRetorno == 'object') {
+            for(var i = 0; i < xRetorno.length; i++) {
+                xRetorno[i].push(`
+                    <button class='btn btn-warning m-1' name='alterar_${i}' type='button'>Gerenciar</button>
+                `);
             }
-            sHtml += `</tr>`;
+            var sHtml = '';
+            for(var i = 0; i < xRetorno.length; i++) {
+                sHtml += `<tr>`;
+                for(var x = 0; x < xRetorno[i].length; x++) {
+                    sHtml += `<th>${xRetorno[i][x]}</th>`;
+                }
+                sHtml += `</tr>`;
+            }
+            if(xRetorno.length < 1) {
+                sHtml += `<tr><th>Não há registros para mostrar.</th><tr>`;
+            }
+            $('#consulta_linhas').html(sHtml);
+            for(var i = 0; i < xRetorno.length; i++) {
+                componente[sRotina]  = new Botao(`alterar_${i}`, redirectAlterar, sRotina, 103, xRetorno[i][0]);
+            }
         }
-        if(xRetorno.length < 1) {
-            sHtml += `<tr><th>Não há registros para mostrar.</th><tr>`;
+        else if(typeof xRetorno == 'string') {
+            $('body').append(xRetorno);
         }
-        $('#consulta_linhas').html(sHtml);
-        for(var i = 0; i < xRetorno.length; i++) {
-            componente[sRotina]  = new Botao(`alterar_${i}`, redirectAlterar, sRotina, 103, xRetorno[i][0]);
-        }
+        
     });
 };
 

@@ -9,6 +9,8 @@ namespace Estrutura;
  */
 class Rotina {
 
+    const DEFAULT = self::PESSOA;
+
     const PESSOA  = 'Pessoa';
     const CONTATO = 'Contato';
 

@@ -16,13 +16,15 @@ class ManageFactory {
         $sPath              = __DIR__ . '/src/Includes';
         $oConfig            = Setup::createAnnotationMetadataConfiguration([$sPath], true);
         $aParametrosConexao = [
-            'dbname'   => 'djonatan',
-            'user'     => 'root',
-            'password' => '',
-            'host'     => 'localhost',
-            'driver'   => 'pdo_mysql',
+            'dbname'   => DB_NAME,
+            'user'     => DB_USER,
+            'password' => DB_PWD,
+            'host'     => DB_HOST,
+            'driver'   => DB_DRIVER,
         ];
+
         return EntityManager::create($aParametrosConexao, $oConfig);
+
 
     }
 
