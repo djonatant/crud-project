@@ -10,11 +10,10 @@ Framework Bootstrap (Para CSS).
 
 COMO INSTALAR:
 
-1. Possuir um ambiente local com o PHP 8.0.2^ instalado e MySql.
-2. Rodar no banco de dados MySql o script do arquivo 'script_djonatan.sql'.
-3. Copiar o restante dos arquivos para a pasta do seu ambiente de desenvolvimento. (Caso utilize o XAMPP para ambiente de desenvolvimento, utilize a pasta htdocs).
-4. Abrir a pasta no seu navegador através do link: 
-    http://localhost/Magazord/public/index.php?rot=Pessoa&aca=101
-    
-    IMPORTANTE: Para abrir a rotina inicial, não esquecer de abrir com os parametros 'public/index.php?rot=Pessoa&aca=101', 
-                onde 'rot' é referente à rotina a ser aberta e 'aca' é referente à ação a ser realizada.
+0.1 - Realizar git clone
+
+1. Dentro da pasta Config > Config.php, ajustar o arquivo as constantes para o devido funcionamento do programa
+1.1 APP_NAME > Nome da pasta que ficará hospedada o software.
+1.2 Constantes com as iniciais 'DB', são referente as credenciais do banco de dados do sistema.
+
+2. Após realizado o item 1, crie um banco de dados conforme definido na constante DB_DRIVER e após execute o arquivo cli-config.php, assim será criado os schemas necessários para o devido funcionamento do sistema.
