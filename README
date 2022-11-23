@@ -17,3 +17,5 @@ COMO INSTALAR:
 1.2 Constantes com as iniciais 'DB', são referente as credenciais do banco de dados do sistema.
 
 2. Após realizado o item 1, crie um banco de dados conforme definido na constante DB_DRIVER e após execute o arquivo cli-config.php, assim será criado os schemas necessários para o devido funcionamento do sistema.
+
+3. Acessar o link http://localhost/<nome-projeto>/public
